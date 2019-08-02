@@ -1,15 +1,18 @@
 ﻿using Superheroes.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace Superheroes.Controllers
 {
     public class SuperheroController : Controller
     {
         ApplicationDbContext db;
+        
         public SuperheroController()
         {
             db = new ApplicationDbContext();
@@ -17,7 +20,7 @@ namespace Superheroes.Controllers
         // GET: Superhero
         public ActionResult Index()
         {
-            return View();
+            return View(db.Heroes.ToList());
         }
 
         // GET: Superhero/Details/5
@@ -92,5 +95,7 @@ namespace Superheroes.Controllers
                 return View();
             }
         }
+
+
     }
 }

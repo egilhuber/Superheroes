@@ -1,7 +1,42 @@
-﻿@{
+﻿@model IEnumerable<Superheroes.Models.Superhero>
+
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+<p>
+    @Html.ActionLink("Create", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.HeroName)</th>
+        <th>@Html.DisplayNameFor(model => model.AlterEgo)</th>
+        <th>@Html.DisplayNameFor(model => model.PrimaryAbility)</th>
+        <th>@Html.DisplayNameFor(model => model.SecondaryAbility)</th>
+        <th>@Html.DisplayNameFor(model => model.CatchPhrase)</th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.HeroName)</td>
+                <td>@Html.DisplayFor(modelItem => item.AlterEgo)</td>
+                <td>@Html.DisplayFor(modelItem => item.PrimaryAbility)</td>
+                <td>@Html.DisplayFor(modelItem => item.SecondaryAbility)</td>
+                <td>@Html.DisplayFor(modelItem => item.CatchPhrase)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detail", "Details", new { id = item.Id })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
