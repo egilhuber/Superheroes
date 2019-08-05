@@ -24,8 +24,18 @@ namespace Superheroes.Controllers
         }
 
         // GET: Superhero/Details/5
-        public ActionResult Details(Superhero superhero)
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            }
+            Superhero superhero = db.Heroes.Find(id);
+            if (superhero == null)
+            {
+                return HttpNotFound();
+            }
             return View(superhero);
         }
 
@@ -105,21 +115,31 @@ namespace Superheroes.Controllers
         }
 
         // GET: Superhero/Delete/5
-        public ActionResult Delete(Superhero superhero)
+        public ActionResult Delete(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            }
+            Superhero superhero = db.Heroes.Find(id);
+            if (superhero == null)
+            {
+                return HttpNotFound();
+            }
             return View(superhero);
         }
 
         // POST: Superhero/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Superhero superhero)
+        public ActionResult Delete(Superhero superhero)
         {
             try
             {
                 // TODO: Add delete logic here
                 Superhero superhero1 =
                     (from h in db.Heroes
-                     where h.Id == id
+                     where h.Id == superhero.Id
                      select h).First();
                 db.Heroes.Remove(superhero1);
                 db.SaveChanges();
