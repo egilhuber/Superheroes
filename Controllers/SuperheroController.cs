@@ -53,14 +53,22 @@ namespace Superheroes.Controllers
         }
 
         // GET: Superhero/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+            
         }
 
         // POST: Superhero/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Superhero superhero)
         {
             try
             {
@@ -82,7 +90,7 @@ namespace Superheroes.Controllers
 
         // POST: Superhero/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Superhero superhero)
         {
             try
             {
